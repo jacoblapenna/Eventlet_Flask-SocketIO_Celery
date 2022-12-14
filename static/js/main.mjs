@@ -8,7 +8,7 @@ button.addEventListener("click", evnet_handler);
 function evnet_handler() {
     button.removeEventListener("click", event_handler);
     socket.emit("start_data");
-});
+}
 
 socket.on("new_data", function(data) {
     span.innerHTML = data.value;
