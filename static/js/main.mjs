@@ -1,7 +1,7 @@
 
 var socket =  io.connect(location.origin);
 var button = document.getElementById("start");
-var span = document.getElementById("data")
+var span = document.getElementById("data");
 
 button.addEventListener("click", evnet_handler);
 
