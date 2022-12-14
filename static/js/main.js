@@ -3,9 +3,9 @@ var socket =  io.connect(location.origin);
 var button = document.getElementById("start");
 var span = document.getElementById("data");
 
-button.addEventListener("click", evnet_handler);
+button.addEventListener("click", event_handler);
 
-function evnet_handler() {
+function event_handler() {
     button.removeEventListener("click", event_handler);
     socket.emit("start_data");
 }
