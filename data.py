@@ -1,5 +1,6 @@
 from multiprocessing import Process
 from random import randrange
+
 from flask_socketio import SocketIO
 
 class Data:

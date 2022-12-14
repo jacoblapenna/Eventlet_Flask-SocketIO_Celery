@@ -17,6 +17,7 @@ def index():
 
 @socketio.on("start_data")
 def start_data():
+    print("staring data strem")
     data = Data()
     data.run()
 
