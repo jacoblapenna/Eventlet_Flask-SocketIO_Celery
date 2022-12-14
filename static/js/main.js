@@ -1,5 +1,8 @@
+import { io } from "socket.io-client";
 
-var socket =  io.connect(location.origin);
+console.log(location.origin);
+
+var socket =  io(location.origin);
 var button = document.getElementById("start");
 var span = document.getElementById("data");
 
