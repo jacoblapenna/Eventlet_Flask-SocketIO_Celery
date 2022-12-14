@@ -34,4 +34,4 @@ if __name__ == "__main__":
     port = 8080
 
     # run application
-    socketio.run(app, host=ip, port=port, use_reloader=False, debug=False)
+    socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
