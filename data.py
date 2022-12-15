@@ -18,3 +18,7 @@ class Data:
 
         process = Process(target=self._stream, name="data_stream")
         process.start()
+    
+    @self._socketio.on("connect")
+    def connect():
+        print("Connection to data object!")
