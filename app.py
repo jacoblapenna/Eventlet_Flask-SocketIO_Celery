@@ -15,6 +15,10 @@ socketio = SocketIO(app, message_queue='redis://', always_connect=True)
 def index():
     return render_template("index.html")
 
+@socketio.on("connect")
+def connect(data):
+    print(data)
+
 @socketio.on("start_data")
 def start_data():
     data = Data()
