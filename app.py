@@ -10,7 +10,6 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 socketio = SocketIO(app, message_queue='redis://')
-socketio.init_app(app, cors_allowed_origins="*")
 
 @app.route('/')
 def index():

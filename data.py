@@ -7,6 +7,7 @@ class Data:
 
     def __init__(self):
         self._socketio = SocketIO(message_queue='redis://')
+        self._socketio.init_app(app, cors_allowed_origins="*")
 
     def _stream(self):
         
