@@ -1,14 +1,8 @@
 
-console.log(location.origin);
-
 var socket =  io(location.origin);
-var button = document.getElementById("start");
 var span = document.getElementById("data");
 
-button.addEventListener("click", event_handler);
-
-function event_handler() {
-    button.removeEventListener("click", event_handler);
+function button_handler() {
     socket.emit("start_data");
 }
 

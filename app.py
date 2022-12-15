@@ -9,7 +9,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue='redis://', always_connect=True)
+socketio = SocketIO(app, message_queue='redis://')
 
 @app.route('/')
 def index():
