@@ -17,8 +17,9 @@ def index():
 
 @socketio.on("start_data")
 def start_data():
-    data = Data()
-    data.run()
+    # data = Data()
+    # data.run()
+    print("Button pressed")
 
 if __name__ == "__main__":
 
