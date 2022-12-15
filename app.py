@@ -9,7 +9,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue='redis://')
+socketio = SocketIO(app, message_queue='redis://', always_connect=True)
 
 @app.route('/')
 def index():
@@ -19,7 +19,6 @@ def index():
 def start_data():
     data = Data()
     data.run()
-    print("Button pressed")
 
 if __name__ == "__main__":
 
