@@ -4,13 +4,14 @@
 
   <title>Minimal Example</title>
   <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </head>
 <body>
 
     <button id="start" onclick="button_handler()">Start Stream</button>
     <span id="data"></span>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
 </html>
