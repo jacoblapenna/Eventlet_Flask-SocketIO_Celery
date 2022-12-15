@@ -23,9 +23,15 @@ def index():
 # listen for and handle data stream request
 @socketio.on("start_data")
 def start_data():
+
+    """  THIS BREAKS WEBSOCKETS WHEN PROCESS IS RAN FROM HERE """
+    """ COMMENT/UNCOMMENT BELOW """
     # data = Data()
     # data.run()
+    """ COMMENT/UNCOMMENT ABOVE """
+
     pass
+    
 
 
 # run app
@@ -40,8 +46,12 @@ if __name__ == "__main__":
     # specify server LAN address
     ip = "192.168.1.8" # insert server ip here as needed
     port = 8080
-    data = Data()
-    data.run()
+
+    """ THIS WORKS WHEN PROCESS IS RAN FROM HERE """
+    """ COMMENT/UNCOMMENT BELOW """
+    # data = Data()
+    # data.run()
+    """ COMMENT/UNCOMMENT ABOVE """
 
     # run application
     socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
