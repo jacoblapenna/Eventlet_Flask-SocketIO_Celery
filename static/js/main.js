@@ -10,6 +10,6 @@ socket.on("new_data", function(data) {
     span.innerHTML = data.value;
 });
 
-socket.on("connect", function(_) {
-    console.log("Connected:", _);
+socket.on("connect", function() {
+    console.log("Connected");
 });
