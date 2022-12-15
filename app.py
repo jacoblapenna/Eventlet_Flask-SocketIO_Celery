@@ -16,8 +16,8 @@ def index():
     return render_template("index.html")
 
 @socketio.on("connect")
-def connect(data):
-    print(data)
+def connect():
+    print("Connected")
 
 @socketio.on("start_data")
 def start_data():
