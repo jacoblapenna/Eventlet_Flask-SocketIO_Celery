@@ -16,7 +16,7 @@ from flask_socketio import SocketIO
 
 # create app and Socket.IO server objects
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue='redis://')
+socketio = SocketIO(app, message_queue='redis://', async_mode="gevent")
 
 # serve page
 @app.route('/')
