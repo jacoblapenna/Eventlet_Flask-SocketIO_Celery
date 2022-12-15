@@ -1,6 +1,9 @@
 # needed to use redis
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
+
+from gevent import monkey
+monkey.patch_all()
 
 # needed to emit from another process
 import redis
