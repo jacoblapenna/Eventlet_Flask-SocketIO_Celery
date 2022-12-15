@@ -23,8 +23,9 @@ def index():
 # listen for and handle data stream request
 @socketio.on("start_data")
 def start_data():
-    data = Data()
-    data.run()
+    # data = Data()
+    # data.run()
+    pass
 
 
 # run app
@@ -39,6 +40,8 @@ if __name__ == "__main__":
     # specify server LAN address
     ip = "192.168.1.8" # insert server ip here as needed
     port = 8080
+    data = Data()
+    data.run()
 
     # run application
     socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
