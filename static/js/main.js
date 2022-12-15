@@ -9,7 +9,3 @@ function button_handler() {
 socket.on("new_data", function(data) {
     span.innerHTML = data.value;
 });
-
-socket.on("connect", function() {
-    console.log("Connected");
-});
