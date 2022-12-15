@@ -26,8 +26,8 @@ def start_data():
 
     """  THIS BREAKS WEBSOCKETS WHEN PROCESS IS RAN FROM HERE """
     """ COMMENT/UNCOMMENT BELOW """
-    # data = Data()
-    # data.run()
+    data = Data()
+    data.run()
     """ COMMENT/UNCOMMENT ABOVE """
 
     pass
