@@ -10,7 +10,7 @@ class Data:
     def __init__(self, broker):
         self._socketio = SocketIO(message_queue=broker)
         self._cel = Celery(broker=broker)
-        self._worker = self._cel.Worker
+        # self._worker = self._cel.Worker(self.)
 
     def _stream(self):
 
