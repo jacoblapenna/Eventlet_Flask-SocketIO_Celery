@@ -1,9 +1,9 @@
 # needed to use redis
-# import eventlet
-# eventlet.monkey_patch()
+import eventlet
+eventlet.monkey_patch()
 
-from gevent import monkey
-monkey.patch_all()
+# from gevent import monkey
+# monkey.patch_all()
 
 # needed to emit from another process
 import redis
@@ -16,7 +16,8 @@ from flask_socketio import SocketIO
 
 # create app and Socket.IO server objects
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue='redis://', async_mode="gevent")
+app.config["MESSAGE_BROKER"] = "redis://localhost:6379/0"
+socketio = SocketIO(app, message_queue=app.config["MESSAGE_BROKER"], async_mode="eventlet")
 
 # serve page
 @app.route('/')
@@ -29,7 +30,7 @@ def start_data():
 
     """  THIS BREAKS WEBSOCKETS WHEN PROCESS IS RAN FROM HERE """
     """ COMMENT/UNCOMMENT BELOW """
-    data = Data()
+    data = Data(app.config["MESSAGE_BROKER"])
     data.run()
     """ COMMENT/UNCOMMENT ABOVE """
 

@@ -2,18 +2,24 @@ from multiprocessing import Process
 from random import randrange
 import time
 
+from celery import Celery
 from flask_socketio import SocketIO
 
 class Data:
 
-    def __init__(self):
-        self._socketio = SocketIO(message_queue='redis://')
+    def __init__(self, broker):
+        self._socketio = SocketIO(message_queue=broker)
+        self._cel = Celery(broker=broker)
 
     def _stream(self):
+
+        @self._cel.task
+        def data_emit(websocket, event, data):
+            websocket.emit(event, data=data)
+
         while True:
             value = randrange(0, 1000, 1) / 100
-            self._socketio.emit("new_data", data={"value" :  value})
-            time.sleep(0.1)
+            data_emit.delay(self._socketio.emit, "new_data", {"value" :  value})
     
     def run(self):
         process = Process(target=self._stream, name="data_stream")
