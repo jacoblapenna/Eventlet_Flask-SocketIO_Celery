@@ -10,12 +10,14 @@ class Data:
     def __init__(self, broker):
         self._socketio = SocketIO(message_queue=broker)
         self._cel = Celery(broker=broker)
+        self._worker = self._cel.Worker
 
     def _stream(self):
 
         @self._cel.task
         def data_emit(websocket, event, data):
             websocket.emit(event, data=data)
+            return 0
 
         while True:
             value = randrange(0, 1000, 1) / 100
