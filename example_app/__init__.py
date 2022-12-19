@@ -34,5 +34,6 @@ cel.conf.update(app.config)
 
 from . import views
 from . import events
+from . import tasks
 
 socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
