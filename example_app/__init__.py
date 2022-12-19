@@ -1,4 +1,5 @@
 from flask import Flask
+from celery import Celery
 
 app = Flask(__name__)
 app.config["MESSAGE_BROKER"] = "redis://localhost:6379/0"
