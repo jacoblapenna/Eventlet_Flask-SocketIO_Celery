@@ -9,8 +9,8 @@ eventlet.monkey_patch()
 import redis
 
 
-from app import app
-from app.tasks import stream_data
+from example_app import app
+from example_app.tasks import stream_data
 
 from flask import render_template
 from flask_socketio import SocketIO
