@@ -9,7 +9,7 @@ import redis
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
-from .celery import make_celery
+from make_celery import make_celery
 
 
 app = Flask(__name__)
