@@ -9,6 +9,7 @@ from flask_socketio import SocketIO
 def stream_data(broker):
 
     data_socketio = SocketIO(message_queue=broker)
+    print("Streaming data...")
 
     while True:
             value = randrange(0, 1000, 1) / 100
