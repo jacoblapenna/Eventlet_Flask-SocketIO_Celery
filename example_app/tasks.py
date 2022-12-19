@@ -2,13 +2,14 @@
 from random import randrange
 
 from . import cel
+from . import app
 
 from flask_socketio import SocketIO
 
 @cel.task
-def stream_data(broker):
+def stream_data():
 
-    data_socketio = SocketIO(message_queue=broker)
+    data_socketio = SocketIO(message_queue=app.config["MESSAGE_BROKER"])
     print("Streaming data...")
 
     while True:

@@ -1,5 +1,5 @@
 
-from . import app, socketio
+from . import socketio
 from .tasks import stream_data
 
 # listen for and handle data stream request
@@ -7,4 +7,4 @@ from .tasks import stream_data
 def start_data_stream():
 
     print("Starting data stream...")
-    stream_data.delay(app.config["MESSAGE_BROKER"])
+    stream_data.delay()
