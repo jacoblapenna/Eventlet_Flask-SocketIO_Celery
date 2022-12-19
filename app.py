@@ -12,6 +12,7 @@ import redis
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from celery import Celery
+from tasks import stream_data
 
 # create app and Socket.IO server objects
 app = Flask(__name__)
