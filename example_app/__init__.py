@@ -32,8 +32,19 @@ socketio = SocketIO(app, message_queue=app.config["MESSAGE_BROKER"])
 cel = Celery(__name__, broker=app.config["MESSAGE_BROKER"], include=["example_app.tasks"])
 cel.conf.update(app.config)
 
+TaskBase = cel.Task
+
+class ContextTask(TaskBase):
+
+    abstract = True
+
+    def __call__(self, *args, **kwargs):
+
+        with app.app_context():
+            return TaskBase.__call__(self, *args, **kwargs)
+    
+cel.Task = ContextTask
+
 from . import views
 from . import events
 from . import tasks
-
-socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
