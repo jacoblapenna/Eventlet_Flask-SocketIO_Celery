@@ -8,8 +8,6 @@ eventlet.monkey_patch()
 # needed to emit from another process
 import redis
 
-# data stream and control object
-from data import Data
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO
