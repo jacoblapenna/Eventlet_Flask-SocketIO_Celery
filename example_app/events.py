@@ -6,4 +6,5 @@ from .tasks import stream_data
 @socketio.on("start_data_stream")
 def start_data_stream():
 
+    print("Starting data stream...")
     stream_data.delay(app.config["MESSAGE_BROKER"])
