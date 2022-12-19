@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "app"
+name = "example_app"
 version = "0.0.1"
 authors = [
   { name="Jacob Lapenna", email="jlapenna@usbr.gov" },
