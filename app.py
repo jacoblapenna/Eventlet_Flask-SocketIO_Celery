@@ -13,9 +13,9 @@ from make_celery import make_celery
 
 
 app = Flask(__name__)
-app.config["MESSAGE_BROKER"] = "redis://localhost:6379/0"
+app.config.update(CELERY_BROKER_URL = "redis://localhost:6379/0")
 
-socketio = SocketIO(app, message_queue=app.config["MESSAGE_BROKER"])
+socketio = SocketIO(app, message_queue=app.config["CELERY_BROKER_URL"])
 
 cel = make_celery(app)
 
@@ -33,7 +33,7 @@ def start_data_stream():
 @cel.task
 def stream_data():
 
-    data_socketio = SocketIO(message_queue=app.config["MESSAGE_BROKER"])
+    data_socketio = SocketIO(message_queue=app.config["CELERY_BROKER_URL"])
     print("Streaming data...")
 
     while True:
