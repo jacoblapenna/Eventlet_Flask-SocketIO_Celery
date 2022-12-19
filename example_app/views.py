@@ -27,7 +27,7 @@ def index():
 @socketio.on("start_data")
 def start_data():
 
-    stream_data.delay(app["MESSAGE_BROKER"])
+    stream_data.delay(app.config["MESSAGE_BROKER"])
 
     """  THIS BREAKS WEBSOCKETS WHEN PROCESS IS RAN FROM HERE """
     """ COMMENT/UNCOMMENT BELOW """

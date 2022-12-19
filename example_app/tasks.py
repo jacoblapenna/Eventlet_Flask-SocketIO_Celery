@@ -1,7 +1,7 @@
 
 from random import randrange
 
-from .celery import cel
+from . import cel
 from flask_socketio import SocketIO
 
 @cel.task
