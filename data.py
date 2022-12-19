@@ -15,12 +15,12 @@ class Data:
     def _stream(self):
 
         @self._cel.task
-        def data_emit(websocket, event, data):
-            websocket.emit(event, data=data)
+        def data_emit(event, data):
+            self._socketio.emit(event, data=data)
 
         while True:
             value = randrange(0, 1000, 1) / 100
-            data_emit.delay(self._socketio, "new_data", {"value" :  value})
+            data_emit.delay("new_data", {"value" :  value})
     
     def run(self):
         process = Process(target=self._stream, name="data_stream")
