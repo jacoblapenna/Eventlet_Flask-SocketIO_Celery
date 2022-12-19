@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools == 58.1.0"]
+
+[project]
+name = "app"
+version = "0.0.1"
+authors = [
+  { name="Jacob Lapenna", email="jlapenna@usbr.gov" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Raspbian GNU/Linux",
+]
