@@ -9,17 +9,14 @@ eventlet.monkey_patch()
 import redis
 
 
-from flask import Flask, render_template
+from app import app
+from app.tasks import stream_data
+
+from flask import render_template
 from flask_socketio import SocketIO
-from celery import Celery
-from tasks import stream_data
 
 # create app and Socket.IO server objects
-app = Flask(__name__)
-app.config["MESSAGE_BROKER"] = "redis://localhost:6379/0"
 socketio = SocketIO(app, message_queue=app.config["MESSAGE_BROKER"], async_mode="eventlet")
-
-cel = Celery("tasks", broker=app["MESSAGE_BROKER"])
 
 # serve page
 @app.route('/')
@@ -30,7 +27,7 @@ def index():
 @socketio.on("start_data")
 def start_data():
 
-    cel.stream_data(app["MESSAGE_BROKER"])
+    stream_data.delay(app["MESSAGE_BROKER"])
 
     """  THIS BREAKS WEBSOCKETS WHEN PROCESS IS RAN FROM HERE """
     """ COMMENT/UNCOMMENT BELOW """
