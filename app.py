@@ -1,6 +1,6 @@
 
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 
 from random import randrange
 
@@ -13,9 +13,10 @@ from make_celery import make_celery
 
 
 app = Flask(__name__)
-app.config.update(CELERY_BROKER_URL = "redis://localhost:6379/0")
+message_broker = "redis://localhost:6379/0"
+app.config.update(CELERY_BROKER_URL = message_broker, CELERY_RESULT_BACKEND=message_broker)
 
-socketio = SocketIO(app, message_queue=app.config["CELERY_BROKER_URL"])
+socketio = SocketIO(app, message_queue=message_broker)
 
 cel = make_celery(app)
 
@@ -37,8 +38,8 @@ def stream_data():
     print("Streaming data...")
 
     while True:
-            value = randrange(0, 1000, 1) / 100
-            data_socketio.emit("new_data", {"value" :  value})
+        value = randrange(0, 1000, 1) / 100
+        data_socketio.emit("new_data", {"value" :  value})
 
 
 if __name__ == "__main__":
