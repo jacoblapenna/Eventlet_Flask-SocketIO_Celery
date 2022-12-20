@@ -10,7 +10,6 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 from make_celery import make_celery
-from celery import Celery
 
 
 app = Flask(__name__)
