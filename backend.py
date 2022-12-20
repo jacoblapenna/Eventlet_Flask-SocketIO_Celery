@@ -31,20 +31,28 @@ def start_data_stream():
 
     print("Starting data stream...")
     result = stream_data.delay()
+    s = result.status
+    lsat_s = None
 
-    print(result)
+    while s != "FAILURE" or s != "SUCCESS":
+        if s != lsat_s:
+            print(s)
+        last_s = s
+    
+    print(s, result.result)
 
 @cel.task
 def stream_data():
 
     data_socketio = SocketIO(message_queue=message_broker)
-    print("Streaming data...")
     i = 1
 
     while i <= 100000:
         value = randrange(0, 1000, 1) / 100
         data_socketio.emit("new_data", {"value" :  value})
         i += 1
+    
+    return i
 
 
 if __name__ == "__main__":
