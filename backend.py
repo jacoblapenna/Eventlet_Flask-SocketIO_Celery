@@ -38,6 +38,7 @@ def start_data_stream():
         if s != last_s:
             print(s)
         last_s = s
+        s = result.status
     
     print(s, result.result)
 
