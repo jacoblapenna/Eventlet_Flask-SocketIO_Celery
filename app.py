@@ -10,6 +10,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 from make_celery import make_celery
+from celery import Celery
 
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ app.config.update(CELERY_BROKER_URL = message_broker, CELERY_RESULT_BACKEND=mess
 
 socketio = SocketIO(app, message_queue=message_broker)
 
-cel = make_celery(app)
+cel = Celery(app.__name__, broker=message_broker)
 
 # serve page
 @app.route('/')
@@ -34,12 +35,14 @@ def start_data_stream():
 @cel.task
 def stream_data():
 
-    data_socketio = SocketIO(message_queue=app.config["CELERY_BROKER_URL"])
+    data_socketio = SocketIO(message_queue=message_broker)
     print("Streaming data...")
+    i = 1
 
-    while True:
+    while i <= 100000:
         value = randrange(0, 1000, 1) / 100
         data_socketio.emit("new_data", {"value" :  value})
+        i += 1
 
 
 if __name__ == "__main__":
