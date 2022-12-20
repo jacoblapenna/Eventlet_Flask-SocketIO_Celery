@@ -32,10 +32,10 @@ def start_data_stream():
     print("Starting data stream...")
     result = stream_data.delay()
     s = result.status
-    lsat_s = None
+    last_s = None
 
     while s != "FAILURE" or s != "SUCCESS":
-        if s != lsat_s:
+        if s != last_s:
             print(s)
         last_s = s
     
