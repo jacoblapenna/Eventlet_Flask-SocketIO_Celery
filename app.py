@@ -19,7 +19,7 @@ app.config.update(CELERY_BROKER_URL = message_broker, CELERY_RESULT_BACKEND=mess
 
 socketio = SocketIO(app, message_queue=message_broker)
 
-cel = Celery(app.name, broker=message_broker)
+cel = make_celery(app)
 
 # serve page
 @app.route('/')
