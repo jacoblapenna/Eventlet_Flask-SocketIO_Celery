@@ -34,6 +34,8 @@ def start_data_stream():
     s = result.status
     last_s = None
 
+    print(type(s))
+
     while s != "FAILURE" or s != "SUCCESS":
         if s != last_s:
             print(s)
