@@ -30,7 +30,9 @@ def index():
 def start_data_stream():
 
     print("Starting data stream...")
-    stream_data.delay()
+    result = stream_data.delay()
+
+    print(result)
 
 @cel.task
 def stream_data():
