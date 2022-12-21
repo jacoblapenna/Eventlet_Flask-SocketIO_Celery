@@ -16,7 +16,7 @@ from celery.contrib import rdb
 message_broker = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue='redis://')
+socketio = SocketIO(app, message_queue=message_broker)
 
 cel = Celery("backend", broker=message_broker, backend=message_broker)
 
@@ -32,7 +32,7 @@ def start_data_stream():
 @cel.task()
 def stream_data(sid):
 
-    data_socketio = SocketIO(message_queue='redis://')
+    data_socketio = SocketIO(message_queue=message_broker)
     i = 1
 
     while i <= 100:
