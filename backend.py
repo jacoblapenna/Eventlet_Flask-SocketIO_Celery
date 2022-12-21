@@ -36,7 +36,7 @@ def stream_data(url):
         i += 1
         time.sleep(0.01)
     
-    return i, value
+    return data_socketio
 
 
 if __name__ == "__main__":
