@@ -14,11 +14,12 @@ from make_celery import make_celery
 
 app = Flask(__name__)
 message_broker = "redis://localhost:6379/0"
-app.config.update(CELERY_BROKER_URL = message_broker, CELERY_RESULT_BACKEND=message_broker)
+app.config.update(CELERY_BROKER_URL=message_broker, CELERY_RESULT_BACKEND=message_broker)
 
 socketio = SocketIO(app, message_queue=message_broker)
 
-cel = make_celery(app)
+cel = cel = Celery(__name__)
+cel.conf.update(app.config)
 
 # serve page
 @app.route('/')
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     else:
         raise Exception("You need redis: https://redis.io/docs/getting-started/installation/. Check that redis-server.service is running!")
 
-    ip = "192.168.1.8"
+    ip = "192.168.1.8" # insert LAN address here
     port = 8080
 
     socketio.run(app, host=ip, port=port, use_reloader=False, debug=True)
