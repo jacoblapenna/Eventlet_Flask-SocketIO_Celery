@@ -14,11 +14,14 @@ from celery import Celery
 
 app = Flask(__name__)
 message_broker = "redis://localhost:6379/0"
-app.config.update(CELERY_BROKER_URL=message_broker, CELERY_RESULT_BACKEND=message_broker)
+app.config.update(CELERY_CONFIG={
+    'broker_url': 'redis://localhost:6379',
+    'result_backend': 'redis://localhost:6379',
+})
 
 socketio = SocketIO(app, message_queue=message_broker)
 
-cel = cel = Celery(__name__)
+cel = cel = Celery(__name__, )
 cel.conf.update(app.config)
 
 # serve page
