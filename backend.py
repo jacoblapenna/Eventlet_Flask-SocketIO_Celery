@@ -5,7 +5,7 @@ eventlet.monkey_patch()
 from random import randrange
 import time
 
-import redis
+from redis import Redis
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
@@ -48,8 +48,8 @@ def stream_data(sid):
 
 if __name__ == "__main__":
 
-    r = redis.Redis()
-    redis.flushall()
+    r = Redis()
+    r.flushall()
 
     if r.ping():
         pass
