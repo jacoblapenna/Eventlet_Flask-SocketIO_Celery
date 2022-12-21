@@ -7,6 +7,7 @@ import redis
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from celery import Celery
+from celery.contrib import rdb
 
 
 message_broker = "redis://localhost:6379/0"
@@ -36,7 +37,9 @@ def stream_data(url):
         i += 1
         time.sleep(0.01)
     
-    return data_socketio
+    rdb.set_trace()
+
+    return i, value
 
 
 if __name__ == "__main__":
