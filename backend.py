@@ -48,7 +48,10 @@ def stream_data(sid):
 
 if __name__ == "__main__":
 
-    if redis.Redis().ping():
+    r = redis.Redis()
+    redis.flushall()
+
+    if r.ping():
         pass
     else:
         raise Exception("You need redis: https://redis.io/docs/getting-started/installation/. Check that redis-server.service is running!")
