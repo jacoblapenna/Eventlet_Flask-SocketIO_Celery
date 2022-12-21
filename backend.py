@@ -29,7 +29,7 @@ def start_data_stream():
 @cel.task()
 def stream_data(url):
 
-    data_socketio = SocketIO(message_queue=url)
+    data_socketio = SocketIO(message_queue='redis://')
     i = 1
 
     while i <= 100:
