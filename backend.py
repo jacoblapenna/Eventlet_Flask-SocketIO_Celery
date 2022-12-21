@@ -22,7 +22,7 @@ def message_queue(db):
 app = Flask(__name__)
 socketio = SocketIO(app, message_queue=message_queue(0), async_mode="gevent")
 
-cel = Celery("backend", broker=message_queue(0), backend=message_queue(0))
+# cel = Celery("backend", broker=message_queue(0), backend=message_queue(0))
 
 @app.route('/')
 def index():
@@ -31,23 +31,23 @@ def index():
 @socketio.on("start_data_stream")
 def start_data_stream():
     socketio.emit("new_data", {"value" :  666})
-    stream_data.delay(request.sid)
+    # stream_data.delay(request.sid)
 
-@cel.task()
-def stream_data(sid):
+# @cel.task()
+# def stream_data(sid):
 
-    # data_socketio = SocketIO(message_queue=message_queue(0))
-    i = 1
+#     # data_socketio = SocketIO(message_queue=message_queue(0))
+#     i = 1
 
-    while i <= 100:
-        value = randrange(0, 10000, 1) / 100
-        # data_socketio.emit("new_data", {"value" :  value})
-        i += 1
-        time.sleep(0.01)
+#     while i <= 100:
+#         value = randrange(0, 10000, 1) / 100
+#         # data_socketio.emit("new_data", {"value" :  value})
+#         i += 1
+#         time.sleep(0.01)
     
-    # rdb.set_trace()
+#     # rdb.set_trace()
 
-    return i, value
+#     return i, value
 
 
 if __name__ == "__main__":
