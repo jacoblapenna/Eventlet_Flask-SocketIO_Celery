@@ -47,9 +47,10 @@ def stream_data(a, b):
     data_socketio = SocketIO(message_queue=message_broker)
     i = 1
 
-    while i <= 100:
-        value = randrange(0, 1000, 1) / 100
-        data_socketio.emit("new_data", {"value" :  value})
+    while i <= 100000:
+        value = randrange(0, 10000, 1) / 100
+        if value <= 10:
+            data_socketio.emit("new_data", {"value" :  value})
         i += 1
     
     return i, value
