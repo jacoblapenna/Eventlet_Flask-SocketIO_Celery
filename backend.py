@@ -23,6 +23,7 @@ def index():
 
 @socketio.on("start_data_stream")
 def start_data_stream():
+    socketio.emit("new_data", {"value" :  666})
     stream_data.delay(message_broker)
 
 @cel.task()
