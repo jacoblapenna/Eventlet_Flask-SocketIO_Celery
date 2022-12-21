@@ -22,16 +22,22 @@ def start_data_stream():
 
     print("Starting data stream...")
     result = add.delay(100, 100)
-    s = result.status
+    
+    s = result.state
     last_s = None
+    monitor = True
 
-    while s != "FAILURE" or s != "SUCCESS":
+    while monitor:
+        
         if s != last_s:
             print(s)
+        elif s == "FAILURE" or s == "SUCCESS":
+            monitor = False
+
         last_s = s
-        s = result.status
-    
-    print(s, result.result)
+        s = result.state
+
+    print(f"Task returned with status {s} and result {result.result}")
 
 @cel.task()
 def add(a, b):
