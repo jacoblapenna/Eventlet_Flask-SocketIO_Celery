@@ -14,10 +14,7 @@ from celery import Celery
 
 app = Flask(__name__)
 message_broker = "redis://localhost:6379/0"
-app.config.update(CELERY_CONFIG={
-    'broker_url': 'redis://localhost:6379',
-    'result_backend': 'redis://localhost:6379',
-})
+app.config.update(CELERY_CONFIG={'broker_url': message_broker, 'result_backend': message_broker})
 
 socketio = SocketIO(app, message_queue=message_broker)
 
