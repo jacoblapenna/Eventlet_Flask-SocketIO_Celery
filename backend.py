@@ -23,7 +23,7 @@ def index():
 def start_data_stream():
 
     print("Starting data stream...")
-    result = stream_data.delay(100, 100)
+    result = stream_data.delay(message_broker)
     
     s = result.state
     last_s = None
@@ -42,9 +42,9 @@ def start_data_stream():
     print(f"Task returned with status {s} and result {result.result}")
 
 @cel.task()
-def stream_data(a, b):
+def stream_data(url):
 
-    data_socketio = SocketIO(message_queue=message_broker)
+    data_socketio = SocketIO(message_queue=url)
     i = 1
 
     while i <= 100000:
