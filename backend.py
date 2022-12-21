@@ -1,4 +1,7 @@
 
+import eventlet
+eventlet.monkey_patch()
+
 from random import randrange
 import time
 
