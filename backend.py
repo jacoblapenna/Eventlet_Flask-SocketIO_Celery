@@ -13,7 +13,7 @@ from celery.contrib import rdb
 message_broker = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, message_queue='redis://')
 
 cel = Celery("backend", broker=message_broker, backend=message_broker)
 
