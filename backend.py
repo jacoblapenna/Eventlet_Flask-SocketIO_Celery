@@ -21,25 +21,7 @@ def index():
 
 @socketio.on("start_data_stream")
 def start_data_stream():
-
-    print("Starting data stream...")
-    result = stream_data.delay(message_broker)
-    
-    s = result.state
-    last_s = None
-    monitor = True
-
-    while monitor:
-        
-        if s != last_s:
-            print(s)
-        elif s == "FAILURE" or s == "SUCCESS":
-            monitor = False
-
-        last_s = s
-        s = result.state
-
-    print(f"Task returned with status {s} and result {result.result}")
+    stream_data.delay(message_broker)
 
 @cel.task()
 def stream_data(url):
