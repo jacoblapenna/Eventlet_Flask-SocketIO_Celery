@@ -17,7 +17,7 @@ def message_queue(db):
     return f"redis://localhost:6379/{db}"
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, message_queue=message_queue(0))
 
 cel = Celery("backend", broker=message_queue(0), backend=message_queue(0))
 
