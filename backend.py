@@ -4,7 +4,7 @@ import time
 
 import redis
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 from celery import Celery
 from celery.contrib import rdb
@@ -24,10 +24,10 @@ def index():
 @socketio.on("start_data_stream")
 def start_data_stream():
     socketio.emit("new_data", {"value" :  666})
-    stream_data.delay(message_broker)
+    stream_data.delay(request.sid)
 
 @cel.task()
-def stream_data(url):
+def stream_data(sid):
 
     data_socketio = SocketIO(message_queue='redis://')
     i = 1
