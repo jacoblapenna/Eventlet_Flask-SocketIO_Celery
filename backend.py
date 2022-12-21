@@ -18,7 +18,7 @@ app.config.update(CELERY_CONFIG={'broker_url': message_broker, 'result_backend':
 
 socketio = SocketIO(app, message_queue=message_broker)
 
-cel = cel = Celery(__name__)
+cel = Celery(__name__)
 cel.conf.update(app.config["CELERY_CONFIG"])
 
 # serve page
