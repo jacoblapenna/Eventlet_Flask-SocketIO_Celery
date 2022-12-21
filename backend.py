@@ -30,7 +30,7 @@ def index():
 def start_data_stream():
 
     print("Starting data stream...")
-    result = stream_data.delay()
+    result = stream_data.delay(100, 100)
     s = result.status
     last_s = None
 
@@ -43,17 +43,17 @@ def start_data_stream():
     print(s, result.result)
 
 @cel.task()
-def stream_data():
+def stream_data(a, b):
+    return a + b
+    # data_socketio = SocketIO(message_queue=message_broker)
+    # i = 1
 
-    data_socketio = SocketIO(message_queue=message_broker)
-    i = 1
-
-    while i <= 100:
-        value = randrange(0, 1000, 1) / 100
-        data_socketio.emit("new_data", {"value" :  value})
-        i += 1
+    # while i <= 100:
+    #     value = randrange(0, 1000, 1) / 100
+    #     data_socketio.emit("new_data", {"value" :  value})
+    #     i += 1
     
-    return i, value
+    # return i, value
 
 
 if __name__ == "__main__":
