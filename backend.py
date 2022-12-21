@@ -41,7 +41,7 @@ def stream_data(sid):
         i += 1
         time.sleep(0.01)
     
-    # rdb.set_trace()
+    rdb.set_trace()
 
     return i, value
 
