@@ -11,7 +11,7 @@ message_broker = "redis://localhost:6379/0"
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-cel = Celery(app.import_name, broker=message_broker, backend=message_broker)
+cel = Celery("backend", broker=message_broker, backend=message_broker)
 
 @app.route('/')
 def index():
