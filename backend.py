@@ -13,12 +13,13 @@ from celery import Celery
 from celery.contrib import rdb
 
 
-message_queue = "redis://localhost:6379/0"
+def message_queue(db):
+    return f"redis://localhost:6379/{db}"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=message_queue)
+socketio = SocketIO(app, message_queue=message_queue(0))
 
-cel = Celery("backend", broker=message_queue, backend=message_queue)
+cel = Celery("backend", broker=message_queue(1), backend=message_queue(2))
 
 @app.route('/')
 def index():
@@ -32,7 +33,7 @@ def start_data_stream():
 @cel.task()
 def stream_data(sid):
 
-    # data_socketio = SocketIO(message_queue=message_queue)
+    # data_socketio = SocketIO(message_queue=message_queue(0))
     i = 1
 
     while i <= 100:
