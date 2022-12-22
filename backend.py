@@ -9,10 +9,10 @@ import time
 # redis = eventlet.import_patched("redis")
 import redis
 celery = eventlet.import_patched("celery")
-flask_socketio = eventlet.import_patched("flask_socketio")
+# flask_socketio = eventlet.import_patched("flask_socketio")
 
 from flask import Flask, render_template, request
-# from flask_socketio import SocketIO
+from flask_socketio import SocketIO
 # from celery import Celery
 # from celery.contrib import rdb
 
