@@ -5,4 +5,7 @@ This package is a basic real-time web application for streaming some CPU intensi
 3. `python -m venv .env`
 4. `source .env/bin/activate`
 5. `pip install --upgrade pip`
-6. `pip install -r `
+6. `pip install -e .`
+7. `python run.py`
+
+`pip install -e .` produces and editable install, hack on the project to suit your needs.
