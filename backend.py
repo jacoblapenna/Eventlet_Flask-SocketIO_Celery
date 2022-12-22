@@ -17,7 +17,8 @@ from celery.contrib import rdb
 message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=message_queue)
+# socketio = SocketIO(app, message_queue=message_queue)
+socketio = SocketIO(app) # <<< use this instance when not monkey patched
 
 cel = Celery("backend", broker=message_queue, backend=message_queue)
 
@@ -33,12 +34,12 @@ def start_data_stream():
 @cel.task()
 def stream_data(sid):
 
-    data_socketio = SocketIO(message_queue=message_queue)
+    # data_socketio = SocketIO(message_queue=message_queue)
     i = 1
 
     while i <= 100:
         value = randrange(0, 10000, 1) / 100
-        data_socketio.emit("new_data", {"value" :  value})
+        # data_socketio.emit("new_data", {"value" :  value})
         i += 1
         time.sleep(0.01)
     
