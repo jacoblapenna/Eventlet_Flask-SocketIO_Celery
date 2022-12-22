@@ -6,7 +6,8 @@ eventlet.monkey_patch(all=False, socket=True)
 from random import randrange
 import time
 
-redis = eventlet.import_patched("redis")
+# redis = eventlet.import_patched("redis")
+import redis
 celery = eventlet.import_patched("celery")
 flask_socketio = eventlet.import_patched("flask_socketio")
 
