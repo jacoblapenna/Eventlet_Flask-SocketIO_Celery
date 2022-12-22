@@ -7,8 +7,7 @@ from random import randrange
 import time
 
 import redis
-# celery = eventlet.import_patched("celery")
-import celery
+celery = eventlet.import_patched("celery")
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
