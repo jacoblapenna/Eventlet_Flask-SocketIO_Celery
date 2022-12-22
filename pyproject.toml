@@ -1,11 +1,17 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 version = "0.0.1"
 name = "application"
 description = "Minimal real-time web application from streaming data from an external process"
+authors = ["Jacob Lapenna"]
+author-email = "9giwa602@duck.com"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = "MIT"
+
+[options]
+sys_platform = "linux"
+install_requires = ["Flask", "Flask-SocketIO", "eventlet", "celery", "redis"]
