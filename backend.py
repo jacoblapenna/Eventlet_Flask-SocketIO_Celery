@@ -6,12 +6,12 @@ import eventlet
 from random import randrange
 import time
 
-from redis import Redis
-
-from flask import Flask, render_template, request
-from flask_socketio import SocketIO
+redis = eventlet.import_patched("redis")
 celery = eventlet.import_patched("celery")
 flask_socketio = eventlet.import_patched("flask_socketio")
+
+from flask import Flask, render_template, request
+# from flask_socketio import SocketIO
 # from celery import Celery
 # from celery.contrib import rdb
 
@@ -52,7 +52,7 @@ def stream_data(sid, message_queue):
 
 if __name__ == "__main__":
 
-    r = Redis()
+    r = redis.Redis()
     r.flushall() # clear the old, abandoned messages from the queue
 
     if r.ping():
