@@ -20,7 +20,7 @@ from flask_socketio import SocketIO
 message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = flask_socketio.SocketIO(app, message_queue=message_queue)
+socketio = SocketIO(app, message_queue=message_queue)
 # socketio = SocketIO(app) # <<< use this instance when not monkey patched
 
 cel = celery.Celery("backend", broker=message_queue, backend=message_queue)
@@ -37,7 +37,7 @@ def start_data_stream():
 @cel.task()
 def stream_data(sid, message_queue):
 
-    data_socketio = flask_socketio.SocketIO(message_queue=message_queue)
+    data_socketio = SocketIO(message_queue=message_queue)
     i = 1
 
     while i <= 100:
