@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+version = "0.0.1"
+name = "application"
+description = "Minimal real-time web application from streaming data from an external process"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
