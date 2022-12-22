@@ -1,6 +1,6 @@
 
 import eventlet
-eventlet.monkey_patch()
+# eventlet.monkey_patch()
 # ^^^ COMMENT/UNCOMMENT to get the task to RUN/NOT RUN
 
 from random import randrange
@@ -11,7 +11,7 @@ from redis import Redis
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 celery = eventlet.import_patched("celery")
-SocketIO = eventlet.import_patched("flask_socketio.SocketIO")
+flask_socketio = eventlet.import_patched("flask_socketio")
 # from celery import Celery
 # from celery.contrib import rdb
 
@@ -19,7 +19,7 @@ SocketIO = eventlet.import_patched("flask_socketio.SocketIO")
 message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=message_queue)
+socketio = flask_socketio.SocketIO(app, message_queue=message_queue)
 # socketio = SocketIO(app) # <<< use this instance when not monkey patched
 
 cel = celery.Celery("backend", broker=message_queue, backend=message_queue)
