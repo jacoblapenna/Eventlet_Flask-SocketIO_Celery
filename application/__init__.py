@@ -1,4 +1,7 @@
 
+import eventlet
+eventlet.monkey_patch(all=False, socket=True)
+
 from application.webserver import WebServer
 from application.messagequeue import MessageQueue
 
