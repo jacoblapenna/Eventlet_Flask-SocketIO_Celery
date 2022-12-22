@@ -11,6 +11,7 @@ from redis import Redis
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 celery = eventlet.import_patched("celery")
+SocketIO = eventlet.import_patched("flask_socketio.SocketIO")
 # from celery import Celery
 # from celery.contrib import rdb
 
