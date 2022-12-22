@@ -1,7 +1,6 @@
 
 import eventlet
 eventlet.monkey_patch(all=False, socket=True)
-# ^^^ COMMENT/UNCOMMENT to get the task to RUN/NOT RUN
 
 from random import randrange
 import time
@@ -17,7 +16,6 @@ message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
 socketio = SocketIO(app, message_queue=message_queue)
-# socketio = SocketIO(app) # <<< use this instance when not monkey patched
 
 cel = celery.Celery("backend", broker=message_queue, backend=message_queue)
 
@@ -27,7 +25,6 @@ def index():
 
 @socketio.on("start_data_stream")
 def start_data_stream():
-    socketio.emit("new_data", {"value" :  666}) # <<< sanity check, socket server is working here
     stream_data.delay(request.sid, message_queue)
 
 @cel.task()
@@ -41,8 +38,6 @@ def stream_data(sid, message_queue):
         data_socketio.emit("new_data", {"value" :  value})
         i += 1
         time.sleep(0.01)
-    
-    # rdb.set_trace() # <<<< comment/uncomment as needed for debugging, see: https://docs.celeryq.dev/en/latest/userguide/debugging.html
 
     return i, value
 
