@@ -1,6 +1,6 @@
 
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 # ^^^ COMMENT/UNCOMMENT to get the task to RUN/NOT RUN
 
 from random import randrange
