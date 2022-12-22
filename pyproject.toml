@@ -10,7 +10,7 @@ authors = ["Jacob Lapenna"]
 author-email = "9giwa602@duck.com"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {type : "MIT"}
+license = {type = "MIT"}
 
 [options]
 sys_platform = "linux"
