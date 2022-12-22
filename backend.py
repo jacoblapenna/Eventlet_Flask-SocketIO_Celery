@@ -17,7 +17,7 @@ from celery.contrib import rdb
 message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=message_queue, async_mode="gevent")
+socketio = SocketIO(app, message_queue=message_queue)
 
 cel = Celery("backend", broker=message_queue, backend=message_queue)
 
