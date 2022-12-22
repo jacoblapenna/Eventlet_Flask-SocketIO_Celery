@@ -1,6 +1,6 @@
 
-# import eventlet
-# eventlet.monkey_patch()
+import eventlet
+eventlet.monkey_patch()
 # ^^^ COMMENT/UNCOMMENT to get the task to RUN/NOT RUN
 
 from random import randrange
@@ -10,17 +10,18 @@ from redis import Redis
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
-from celery import Celery
-from celery.contrib import rdb
+celery = eventlet.import_patched("celery")
+# from celery import Celery
+# from celery.contrib import rdb
 
 
 message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-# socketio = SocketIO(app, message_queue=message_queue)
-socketio = SocketIO(app) # <<< use this instance when not monkey patched
+socketio = SocketIO(app, message_queue=message_queue)
+# socketio = SocketIO(app) # <<< use this instance when not monkey patched
 
-cel = Celery("backend", broker=message_queue, backend=message_queue)
+cel = celery.Celery("backend", broker=message_queue, backend=message_queue)
 
 @app.route('/')
 def index():
@@ -43,7 +44,7 @@ def stream_data(sid, message_queue):
         i += 1
         time.sleep(0.01)
     
-    rdb.set_trace() # <<<< comment/uncomment as needed for debugging, see: https://docs.celeryq.dev/en/latest/userguide/debugging.html
+    # rdb.set_trace() # <<<< comment/uncomment as needed for debugging, see: https://docs.celeryq.dev/en/latest/userguide/debugging.html
 
     return i, value
 
