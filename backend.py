@@ -6,15 +6,12 @@ eventlet.monkey_patch(all=False, socket=True)
 from random import randrange
 import time
 
-# redis = eventlet.import_patched("redis")
 import redis
-celery = eventlet.import_patched("celery")
-# flask_socketio = eventlet.import_patched("flask_socketio")
+# celery = eventlet.import_patched("celery")
+import celery
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
-# from celery import Celery
-# from celery.contrib import rdb
 
 
 message_queue = "redis://localhost:6379/0"
