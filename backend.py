@@ -29,10 +29,10 @@ def index():
 @socketio.on("start_data_stream")
 def start_data_stream():
     socketio.emit("new_data", {"value" :  666}) # <<< sanity check, socket server is working here
-    stream_data.delay(request.sid)
+    stream_data.delay(request.sid, message_queue)
 
 @cel.task()
-def stream_data(sid):
+def stream_data(sid, message_queue):
 
     # data_socketio = SocketIO(message_queue=message_queue)
     i = 1
