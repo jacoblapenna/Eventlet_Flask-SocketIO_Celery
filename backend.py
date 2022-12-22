@@ -36,7 +36,7 @@ def start_data_stream():
 @cel.task()
 def stream_data(sid, message_queue):
 
-    data_socketio = SocketIO(message_queue=message_queue)
+    data_socketio = flask_socketio.SocketIO(message_queue=message_queue)
     i = 1
 
     while i <= 100:
