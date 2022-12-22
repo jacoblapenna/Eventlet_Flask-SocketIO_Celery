@@ -1,9 +1,7 @@
 
-# import eventlet
-# eventlet.monkey_patch()
-
-from gevent import monkey
-monkey.patch_all()
+import eventlet
+eventlet.monkey_patch()
+# ^^^ COMMENT/UNCOMMENT to get the task to RUN/NOT RUN
 
 from random import randrange
 import time
@@ -16,13 +14,12 @@ from celery import Celery
 from celery.contrib import rdb
 
 
-def message_queue(db):
-    return f"redis://localhost:6379/{db}"
+message_queue = "redis://localhost:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=message_queue(0), async_mode="gevent")
+socketio = SocketIO(app, message_queue=message_queue, async_mode="gevent")
 
-# cel = Celery("backend", broker=message_queue(0), backend=message_queue(0))
+cel = Celery("backend", broker=message_queue, backend=message_queue)
 
 @app.route('/')
 def index():
@@ -30,30 +27,30 @@ def index():
 
 @socketio.on("start_data_stream")
 def start_data_stream():
-    socketio.emit("new_data", {"value" :  666})
-    # stream_data.delay(request.sid)
+    socketio.emit("new_data", {"value" :  666}) # <<< sanity check, socket server is working here
+    stream_data.delay(request.sid)
 
-# @cel.task()
-# def stream_data(sid):
+@cel.task()
+def stream_data(sid):
 
-#     # data_socketio = SocketIO(message_queue=message_queue(0))
-#     i = 1
+    data_socketio = SocketIO(message_queue=message_queue)
+    i = 1
 
-#     while i <= 100:
-#         value = randrange(0, 10000, 1) / 100
-#         # data_socketio.emit("new_data", {"value" :  value})
-#         i += 1
-#         time.sleep(0.01)
+    while i <= 100:
+        value = randrange(0, 10000, 1) / 100
+        data_socketio.emit("new_data", {"value" :  value})
+        i += 1
+        time.sleep(0.01)
     
-#     # rdb.set_trace()
+    rdb.set_trace() # <<<< comment/uncomment as needed for debugging, see: https://docs.celeryq.dev/en/latest/userguide/debugging.html
 
-#     return i, value
+    return i, value
 
 
 if __name__ == "__main__":
 
     r = Redis()
-    r.flushall()
+    r.flushall() # clear the old, abandoned messages from the queue
 
     if r.ping():
         pass
