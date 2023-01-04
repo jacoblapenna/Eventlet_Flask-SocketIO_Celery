@@ -19,4 +19,3 @@ socketio = SocketIO(app, message_queue=message_queue)
 
 import application.views
 import application.events
-import application.celery
