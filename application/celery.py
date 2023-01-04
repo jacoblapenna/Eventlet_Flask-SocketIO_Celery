@@ -5,4 +5,4 @@ import eventlet
 celery = eventlet.import_patched("celery")
 
 
-cel = celery.Celery("backend", broker=message_queue, backend=message_queue)
+cel = celery.Celery(broker=message_queue, backend=message_queue)
