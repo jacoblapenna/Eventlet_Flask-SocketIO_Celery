@@ -2,7 +2,7 @@
 from random import randrange
 from time import sleep
 
-from application.celery import cel
+from application import cel
 
 from flask_socketio import SocketIO
 
