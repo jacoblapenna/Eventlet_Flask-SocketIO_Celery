@@ -17,7 +17,7 @@ r.flushall()
 
 
 # start celery worker
-cmd = "celery -A application.celery.cel worker".split(' ')
+cmd = "celery -A application.cel worker".split(' ')
 subprocess.Popen(cmd)
 
 
